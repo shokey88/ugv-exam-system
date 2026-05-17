@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UGV Admin Login</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial,sans-serif;
+    }
+
+    body{
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:linear-gradient(135deg,#1f4037,#99f2c8);
+      padding:20px;
+    }
+
+    .admin-box{
+      width:100%;
+      max-width:400px;
+      background:#fff;
+      padding:35px 25px;
+      border-radius:15px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.2);
+      text-align:center;
+    }
+
+    .admin-box h1{
+      color:#1f4037;
+      font-size:42px;
+      margin-bottom:5px;
+    }
+
+    .admin-box h3{
+      font-size:14px;
+      color:#666;
+      margin-bottom:20px;
+    }
+
+    .admin-box h2{
+      color:#1f4037;
+      margin-bottom:20px;
+    }
+
+    .admin-box input{
+      width:100%;
+      padding:12px;
+      margin:10px 0;
+      border:1px solid #ccc;
+      border-radius:8px;
+      outline:none;
+      font-size:15px;
+    }
+
+    .admin-box button{
+      width:100%;
+      padding:12px;
+      margin-top:15px;
+      background:#1f4037;
+      color:white;
+      border:none;
+      border-radius:8px;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="admin-box">
+
+    <h1>UGV</h1>
+
+    <h3>University of Global Village</h3>
+
+    <h2>Admin Login</h2>
+
+    <!-- DJANGO FORM -->
+    <form method="POST">
+
+      {% csrf_token %}
+
+      <input
+        type="email"
+        name="email"
+        placeholder="Enter Admin Email"
+        required
+      >
+
+      <input
+        type="password"
+        name="password"
+        placeholder="Enter Password"
+        required
+      >
+
+      <button type="submit">
+        Login
+      </button>
+
+    </form>
+
+  </div>
+
+</body>
+</html>

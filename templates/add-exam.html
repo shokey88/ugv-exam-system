@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UGV Add Exam</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background: linear-gradient(135deg, #1f4037, #99f2c8);
+      padding:15px;
+    }
+
+    .form-box{
+      width:100%;
+      max-width:450px;
+      background:#ffffff;
+      padding:30px 25px;
+      border-radius:15px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    h1{
+      text-align:center;
+      color:#1f4037;
+      font-size:40px;
+      margin-bottom:5px;
+    }
+
+    h4{
+      text-align:center;
+      color:gray;
+      margin-bottom:10px;
+      font-weight:normal;
+      font-size:14px;
+    }
+
+    h2{
+      text-align:center;
+      margin-bottom:25px;
+      color:#111827;
+      font-size:24px;
+    }
+
+    input,
+    select{
+      width:100%;
+      padding:12px;
+      margin:10px 0;
+      border:1px solid #ddd;
+      border-radius:8px;
+      font-size:14px;
+      outline:none;
+      transition:0.3s;
+    }
+
+    input:focus,
+    select:focus{
+      border-color:#1f4037;
+      box-shadow:0 0 5px rgba(31,64,55,0.3);
+    }
+
+    button{
+      width:100%;
+      padding:13px;
+      background:#1f4037;
+      color:white;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+      font-size:16px;
+      transition:0.3s;
+      margin-top:12px;
+    }
+
+    button:hover{
+      background:#145a32;
+    }
+
+    @media(max-width:500px){
+
+      .form-box{
+        padding:25px 18px;
+      }
+
+      h1{
+        font-size:32px;
+      }
+
+      h2{
+        font-size:20px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="form-box">
+
+    <h1>UGV</h1>
+
+    <h4>University of Global Village</h4>
+
+    <h2>Add Exam Schedule</h2>
+
+    <!-- DJANGO FORM -->
+    <form method="POST">
+
+      {% csrf_token %}
+
+      <input 
+        type="text"
+        name="subject"
+        placeholder="Subject Name"
+        required
+      >
+
+      <input 
+        type="date"
+        name="exam_date"
+        required
+      >
+
+      <input 
+        type="time"
+        name="exam_time"
+        required
+      >
+
+      <input 
+        type="text"
+        name="room"
+        placeholder="Room Number"
+        required
+      >
+
+      <!-- DEPARTMENT -->
+      <select name="department" required>
+
+        <option value="">Select Department</option>
+
+        <option value="CSE">CSE</option>
+
+        <option value="EEE">EEE</option>
+
+        <option value="BBA">BBA</option>
+
+        <option value="English">English</option>
+
+        <option value="ME">ME</option>
+
+        <option value="Civil">Civil</option>
+
+      </select>
+
+      <!-- SEMESTER -->
+      <select name="semester" required>
+
+        <option value="">Select Semester</option>
+
+        <option value="1">1st Semester</option>
+
+        <option value="2">2nd Semester</option>
+
+        <option value="3">3rd Semester</option>
+
+        <option value="4">4th Semester</option>
+
+        <option value="5">5th Semester</option>
+
+        <option value="6">6th Semester</option>
+
+        <option value="7">7th Semester</option>
+
+        <option value="8">8th Semester</option>
+
+      </select>
+
+      <button type="submit">
+        Save Exam
+      </button>
+
+    </form>
+
+  </div>
+
+</body>
+</html>

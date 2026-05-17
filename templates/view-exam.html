@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UGV Exam Routine</title>
+
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      background: linear-gradient(135deg, #1f4037, #99f2c8);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 15px;
+    }
+
+    .table-box{
+      width: 100%;
+      max-width: 1100px;
+      background: #fff;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    h2{
+      text-align: center;
+      font-size: 30px;
+      color: #1f4037;
+    }
+
+    h4{
+      text-align: center;
+      color: gray;
+      margin-bottom: 20px;
+    }
+
+    /* FILTER */
+    .filter-box{
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .filter-box select,
+    .filter-box button{
+      flex: 1;
+      min-width: 180px;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .filter-box button{
+      background: #1f4037;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .filter-box button:hover{
+      background: #145a32;
+    }
+
+    /* TABLE */
+    table{
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 650px;
+    }
+
+    th{
+      background: #1f4037;
+      color: white;
+      padding: 12px;
+      text-align: center;
+    }
+
+    td{
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    tr:hover{
+      background: #f3f4f6;
+    }
+
+    .table-wrapper{
+      overflow-x: auto;
+    }
+
+    .empty{
+      text-align: center;
+      padding: 30px;
+      color: gray;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="table-box">
+
+    <h2>UGV Exam Routine</h2>
+    <h4>University of Global Village</h4>
+
+    <!-- FILTER -->
+    <form method="GET" class="filter-box">
+
+      <select name="department">
+        <option value="">Select Department</option>
+        <option value="CSE">CSE</option>
+        <option value="Civil">Civil</option>
+        <option value="EEE">EEE</option>
+        <option value="BBA">BBA</option>
+        <option value="English">English</option>
+        <option value="ME">ME</option>
+      </select>
+
+      <select name="semester">
+        <option value="">Select Semester</option>
+        <option value="1">1st Semester</option>
+        <option value="2">2nd Semester</option>
+        <option value="3">3rd Semester</option>
+        <option value="4">4th Semester</option>
+        <option value="5">5th Semester</option>
+        <option value="6">6th Semester</option>
+        <option value="7">7th Semester</option>
+        <option value="8">8th Semester</option>
+      </select>
+
+      <button type="submit">Filter</button>
+
+    </form>
+
+    <!-- TABLE -->
+    <div class="table-wrapper">
+
+      <table>
+
+        <tr>
+          <th>Department</th>
+          <th>Subject</th>
+          <th>Semester</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Room</th>
+        </tr>
+
+        {% if exams %}
+
+          {% for exam in exams %}
+          <tr>
+            <td>{{ exam.department }}</td>
+            <td>{{ exam.subject }}</td>
+            <td>{{ exam.semester }}</td>
+            <td>{{ exam.exam_date }}</td>
+            <td>{{ exam.exam_time }}</td>
+            <td>{{ exam.room }}</td>
+          </tr>
+          {% endfor %}
+
+        {% else %}
+
+          <tr>
+            <td colspan="6" class="empty">
+              No Exam Found ❌
+            </td>
+          </tr>
+
+        {% endif %}
+
+      </table>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

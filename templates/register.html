@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UGV Registration</title>
+
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #1f4037, #99f2c8);
+      padding: 20px;
+    }
+
+    .register-box{
+      width: 100%;
+      max-width: 450px;
+      background: #fff;
+      padding: 35px 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .register-box h1{
+      font-size: 40px;
+      color: #1f4037;
+    }
+
+    .register-box h3{
+      font-size: 14px;
+      color: gray;
+      margin-bottom: 10px;
+    }
+
+    .register-box h2{
+      font-size: 22px;
+      color: #111827;
+      margin-bottom: 25px;
+    }
+
+    .register-box input,
+    .register-box select{
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .register-box input:focus,
+    .register-box select:focus{
+      border-color: #1f4037;
+      box-shadow: 0 0 5px rgba(31,64,55,0.4);
+    }
+
+    .register-box button{
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #1f4037;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .register-box button:hover{
+      background: #145a32;
+    }
+
+    .login-link{
+      margin-top: 15px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .login-btn{
+      margin-top: 10px;
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      background: #0f766e;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .login-btn:hover{
+      background: #0d5f58;
+    }
+
+    a{
+      text-decoration: none;
+    }
+
+    @media(max-width: 480px){
+      .register-box{
+        padding: 25px 20px;
+      }
+
+      .register-box h1{
+        font-size: 32px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="register-box">
+
+    <h1>UGV</h1>
+    <h3>University of Global Village</h3>
+    <h2>Student Registration</h2>
+
+    <!-- ✅ FIXED FORM -->
+    <form method="POST" action="">
+      {% csrf_token %}
+
+      <input type="text" name="fullname" placeholder="Full Name" required>
+
+      <input type="text" name="username" placeholder="Username" required>
+
+      <input type="email" name="email" placeholder="Email" required>
+
+      <select name="department" required>
+        <option value="">Select Department</option>
+        <option value="CSE">CSE</option>
+        <option value="Civil">Civil</option>
+        <option value="ME">ME</option>
+        <option value="EEE">EEE</option>
+        <option value="BBA">BBA</option>
+        <option value="English">English</option>
+      </select>
+
+      <input type="password" name="password" placeholder="Password" required>
+
+      <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+
+      <button type="submit">Register</button>
+
+    </form>
+
+    <p class="login-link">Already have an account?</p>
+
+    <a href="/login/">
+      <button type="button" class="login-btn">Login</button>
+    </a>
+
+  </div>
+
+</body>
+</html>

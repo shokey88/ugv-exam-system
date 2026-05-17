@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UGV All Exams</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      background: linear-gradient(135deg, #1f4037, #99f2c8);
+      min-height:100vh;
+      padding:20px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .container{
+      width:100%;
+      max-width:900px;
+      background:#fff;
+      padding:30px;
+      border-radius:15px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    h1{
+      text-align:center;
+      color:#1f4037;
+      font-size:40px;
+      margin-bottom:5px;
+    }
+
+    h4{
+      text-align:center;
+      color:gray;
+      margin-bottom:30px;
+      font-weight:normal;
+    }
+
+    .exam-card{
+      background:#f9fafb;
+      border-radius:12px;
+      padding:20px;
+      margin-bottom:20px;
+      box-shadow:0 5px 12px rgba(0,0,0,0.08);
+      border-left:6px solid #1f4037;
+    }
+
+    .exam-card h2{
+      color:#1f4037;
+      margin-bottom:15px;
+      font-size:24px;
+    }
+
+    .exam-card p{
+      margin:8px 0;
+      color:#333;
+      font-size:15px;
+    }
+
+    .label{
+      font-weight:bold;
+      color:#111827;
+    }
+
+    .delete-btn{
+      margin-top:15px;
+      width:100%;
+      padding:12px;
+      background:#dc2626;
+      color:white;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+      font-size:15px;
+      transition:0.3s;
+    }
+
+    .delete-btn:hover{
+      background:#b91c1c;
+    }
+
+    .empty-box{
+      text-align:center;
+      padding:40px;
+      color:#666;
+      font-size:18px;
+    }
+
+    @media(max-width:600px){
+
+      .container{
+        padding:20px;
+      }
+
+      h1{
+        font-size:32px;
+      }
+
+      .exam-card h2{
+        font-size:20px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>UGV</h1>
+
+    <h4>University of Global Village</h4>
+
+    {% if exams %}
+
+      {% for exam in exams %}
+
+      <div class="exam-card">
+
+        <h2>{{ exam.subject }}</h2>
+
+        <p>
+          <span class="label">Department:</span>
+          {{ exam.department }}
+        </p>
+
+        <p>
+          <span class="label">Semester:</span>
+          {{ exam.semester }}
+        </p>
+
+        <p>
+          <span class="label">Exam Date:</span>
+          {{ exam.exam_date }}
+        </p>
+
+        <p>
+          <span class="label">Exam Time:</span>
+          {{ exam.exam_time }}
+        </p>
+
+        <p>
+          <span class="label">Room:</span>
+          {{ exam.room }}
+        </p>
+
+        <form action="/delete-exam/{{ exam.id }}/" method="POST">
+
+          {% csrf_token %}
+
+          <button type="submit" class="delete-btn">
+            Delete Exam
+          </button>
+
+        </form>
+
+      </div>
+
+      {% endfor %}
+
+    {% else %}
+
+      <div class="empty-box">
+        No Exams Added Yet ❌
+      </div>
+
+    {% endif %}
+
+  </div>
+
+</body>
+</html>

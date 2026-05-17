@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UGV Exam Login</title>
+
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #1f4037, #99f2c8);
+      padding: 20px;
+    }
+
+    .login-box{
+      width: 100%;
+      max-width: 400px;
+      background: white;
+      padding: 40px 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .login-box h1{
+      font-size: 40px;
+      color: #1f4037;
+      margin-bottom: 5px;
+    }
+
+    .login-box h3{
+      font-size: 15px;
+      color: gray;
+      margin-bottom: 20px;
+    }
+
+    .login-box h2{
+      font-size: 24px;
+      margin-bottom: 30px;
+      color: #111827;
+    }
+
+    .login-box input{
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 18px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .login-box button{
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #1f4037;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    .login-box button:hover{
+      background: #145a32;
+    }
+
+    .register-btn{
+      background: #0f766e !important;
+      margin-top: 10px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="login-box">
+
+    <h1>UGV</h1>
+    <h3>University of Global Village</h3>
+    <h2>Exam Management System</h2>
+
+    <!-- 🔥 Django Backend Form -->
+    <form method="POST">
+      {% csrf_token %}
+
+      <input type="text" name="username" placeholder="Enter Username" required>
+
+      <input type="password" name="password" placeholder="Enter Password" required>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <p>Don't have an account?</p>
+
+    <a href="/register/">
+      <button type="button" class="register-btn">Register</button>
+    </a>
+
+  </div>
+
+</body>
+</html>
