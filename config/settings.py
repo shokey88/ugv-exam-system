@@ -10,7 +10,7 @@ SECRET_KEY = 'django-insecure-diizpit+&wiy+b3@m$5p&59i!o(!a)97(r1=_gco!!fu51y^j#
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["*"]
 
 
 # =========================
@@ -118,6 +118,9 @@ SESSION_SAVE_EVERY_REQUEST = True
 # 🔥 CSRF FIX (LOCAL DEV)
 # =========================
 CSRF_TRUSTED_ORIGINS = [
+    "https://ugc-exam-system-production.up.railway.app",
     "http://127.0.0.1:8000",
     "http://localhost:8000",
 ]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
