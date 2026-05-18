@@ -6,10 +6,13 @@ from .models import Student, Exam
 # HOME (SAFE REDIRECT)
 # =========================
 def home(request):
+
     if request.session.get('admin'):
         return redirect('/dashboard/')
+
     if request.session.get('student_id'):
         return redirect('/exam/')
+
     return redirect('/login/')
 
 
@@ -31,15 +34,25 @@ def register(request):
         password = request.POST['password']
         confirm_password = request.POST['confirm_password']
 
+        # Username check
         if Student.objects.filter(username=username).exists():
-            return render(request, 'register.html', {'error': 'Username exists ❌'})
+            return render(request, 'register.html', {
+                'error': 'Username already exists ❌'
+            })
 
+        # Email check
         if Student.objects.filter(email=email).exists():
-            return render(request, 'register.html', {'error': 'Email exists ❌'})
+            return render(request, 'register.html', {
+                'error': 'Email already exists ❌'
+            })
 
+        # Password check
         if password != confirm_password:
-            return render(request, 'register.html', {'error': 'Password not match ❌'})
+            return render(request, 'register.html', {
+                'error': 'Password not matched ❌'
+            })
 
+        # Create student
         Student.objects.create(
             fullname=request.POST['fullname'],
             username=username,
@@ -72,13 +85,17 @@ def login(request):
         ).first()
 
         if student:
+
             request.session.flush()
+
             request.session['student_id'] = student.id
             request.session['department'] = student.department
 
             return redirect('/exam/')
 
-        return render(request, 'login.html', {'error': 'Invalid login ❌'})
+        return render(request, 'login.html', {
+            'error': 'Invalid login ❌'
+        })
 
     return render(request, 'login.html')
 
@@ -91,11 +108,29 @@ def view_exam(request):
     if not request.session.get('student_id'):
         return redirect('/login/')
 
+    # Student department
+    student_department = request.session.get('department')
+
+    # Default exam list
     exams = Exam.objects.filter(
-        department=request.session.get('department')
+        department=student_department
     )
 
-    return render(request, 'view-exam.html', {'exams': exams})
+    # Filter values
+    department = request.GET.get('department')
+    semester = request.GET.get('semester')
+
+    # Department filter
+    if department:
+        exams = exams.filter(department=department)
+
+    # Semester filter
+    if semester:
+        exams = exams.filter(semester=semester)
+
+    return render(request, 'view-exam.html', {
+        'exams': exams
+    })
 
 
 # =========================
@@ -117,6 +152,7 @@ def admin_login(request):
         if email == "admin@ugv.edu" and password == "admin123":
 
             request.session.flush()
+
             request.session['admin'] = True
 
             return redirect('/dashboard/')
@@ -173,11 +209,13 @@ def admin_view_exam(request):
 
     exams = Exam.objects.all()
 
-    return render(request, 'admin-view-exam.html', {'exams': exams})
+    return render(request, 'admin-view-exam.html', {
+        'exams': exams
+    })
 
 
 # =========================
-# DELETE EXAM (SAFE METHOD)
+# DELETE EXAM
 # =========================
 def delete_exam(request, id):
 
@@ -185,6 +223,7 @@ def delete_exam(request, id):
         return redirect('/admin-login/')
 
     exam = get_object_or_404(Exam, id=id)
+
     exam.delete()
 
     return redirect('/admin-exam/')
@@ -194,7 +233,9 @@ def delete_exam(request, id):
 # LOGOUT STUDENT
 # =========================
 def logout(request):
+
     request.session.flush()
+
     return redirect('/login/')
 
 
@@ -202,5 +243,7 @@ def logout(request):
 # LOGOUT ADMIN
 # =========================
 def admin_logout(request):
+
     request.session.flush()
+
     return redirect('/admin-login/')
